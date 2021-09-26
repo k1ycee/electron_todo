@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy: script-src 'nonce-EDNnf03nceIOfn39fn3e9h3sdfa'"
+    />
+    <title>Electron Hello World!</title>
+  </head>
+  <body>
+    <h1>Electron Hello Todo App</h1>
+    <ul></ul>
+
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa">
+      const electron = require("electron");
+      const { ipcRenderer } = electron;
+
+      ipcRenderer.on("user:like", (event, like) => {
+        const li = document.createElement("li");
+        const text = document.createTextNode(like);
+        li.appendChild(text);
+        document.querySelector("ul").appendChild(li);
+      });
+      ipcRenderer.on("user:clear", (event, clear) => {
+        const ul = document.querySelector("ul");
+        ul.innerHTML = clear;
+      });
+    </script>
+  </body>
+</html>

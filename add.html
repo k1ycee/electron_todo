@@ -1,0 +1,26 @@
+<head>
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="script-src 'self' 'unsafe-inline';"
+  />
+</head>
+<body>
+  <form>
+    <div>
+      <label>Tell Me What you Like</label>
+      <input autofocus />
+    </div>
+    <button type="submit">Okay</button>
+  </form>
+
+  <script>
+    const electron = require("electron");
+    const { ipcRenderer } = electron;
+    document.querySelector("form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const { value } = document.querySelector("input");
+
+      ipcRenderer.send("user:like", value);
+    });
+  </script>
+</body>
